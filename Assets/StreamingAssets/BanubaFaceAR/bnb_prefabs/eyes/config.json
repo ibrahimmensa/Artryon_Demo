@@ -1,0 +1,52 @@
+{
+    "apply_order": 60,
+    "depends": ["camera", "eyes_nn"],
+    "assets": {
+        "attachments": {
+            "eyes_camera_color": {"type": "color"}
+        },
+        "materials": {
+            "shaders/eyes/color": 
+            {
+                "path": "/bnb_prefabs/eyes/shaders/color",
+                "samplers": 
+                [
+                    { "name": "tex_camera", "image": "eyes_camera_color" },
+                    { "name": "tex_l_eye_mask", "image": "left_eye_nn" },
+                    { "name": "tex_r_eye_mask", "image": "right_eye_nn" },
+
+                    { "name": "tex_l_eye_pupil_mask", "image": "left_eye_pupil_nn" },
+                    { "name": "tex_r_eye_pupil_mask", "image": "right_eye_pupil_nn" },
+
+                    { "name": "tex_l_eye_corneosclera_mask", "image": "left_eye_corneosclera_nn" },
+                    { "name": "tex_r_eye_corneosclera_mask", "image": "right_eye_corneosclera_nn" }
+                ],
+                "state": { "blend": "alpha", "backfaces": true, "colorwrite": true, "ztest": false, "zwrite": false },
+                "parameters": {
+                    "@eyes_color": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@pupil_color": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@corneosclera_color": { "type": "vec4", "value": [0, 0, 0, 0] }
+                }
+            }
+        }
+    },
+    "entities": {
+        "eyes_color":{ "components": { "mesh_instance":{ "mesh": "$builtin$meshes/fs_tri", "materials": [ "shaders/eyes/color" ]}},"layer": "eyes_color"}
+    },
+    "hierarchy": {
+        "root": [
+            "eyes_color"
+        ]
+    },
+    "render_list": {
+        "default": [
+            { "layer": "camera_layer", "render_target": "eyes_camera_color" },
+            { "layer": "eyes_color", "render_target": "base_rt" }
+        ]
+    },
+    "render_targets": 
+    {
+        "eyes_camera_color": { "attachments": [ "eyes_camera_color" ]}
+    },
+    "script": "/bnb_prefabs/eyes/scripts/index.js"
+}

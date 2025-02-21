@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "description": "Eyes recolor.",
+    "properties": {
+        "eyes": {
+            "type": "string",
+            "default": "0 0 0 0",
+            "description": "Eyes (i.e. iris) color."
+        },
+        "corneosclera": {
+            "type": "string",
+            "default": "0 0 0 0",
+            "description": "Corneosclera (sclera in everyday language) color."
+        },
+        "pupil": {
+            "type": "string",
+            "default": "0 0 0 0",
+            "description": "Pupil color."
+        }
+    }
+}

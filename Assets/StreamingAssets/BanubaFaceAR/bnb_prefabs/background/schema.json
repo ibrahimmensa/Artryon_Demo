@@ -1,0 +1,44 @@
+{
+    "type": "object",
+    "description": "Enable virtual background.",
+    "properties": {
+        "transparency": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Sets the background transparency from 0 to 1."
+        },
+        "texture": {
+            "type": "string",
+            "description": "Sets the file (image or video) as background texture."
+        },
+        "rotation": {
+            "type": "integer",
+            "description": "Rotates the background texture clockwise in degrees."
+        },
+        "scale": {
+            "type": "number",
+            "description": "Scales the background texture."
+        },
+        "content_mode": {
+            "type": "string",
+            "enum": [
+                "scale_to_fill",
+                "fill",
+                "fit"
+            ],
+            "description": "Fits the background texture inside frame."
+        },
+        "blur": {
+            "type": "number",
+            "maximum": 1,
+            "minimum": 0,
+            "description": "Sets the background blur radius. Radius in [0, 1] range."
+        },
+        "clear_color": {
+            "type": "string",
+            "default": "0 0 0 1",
+            "description": "Specifies the color of the area not covered by background texture (e.g. content_mode, fit)."
+        }
+    }
+}

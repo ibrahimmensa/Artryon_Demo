@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "description": "Hair recoloring.",
+    "properties": {
+        "color": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "default": "0 0 0 0"
+            },
+            "minItems": 1,
+            "description": "Apply solid color if one color supplied, or gradient recoloring if array."
+        }
+    }
+}

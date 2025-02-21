@@ -1,0 +1,160 @@
+{
+    "apply_order": 180,
+    "depends": ["camera"],
+    "assets": {
+        "attachments": {
+            "hair_camera_color": { "type": "color"},
+            "hair_mask_color": { "type": "color"},
+            "downscale0": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 256, "height": 256, "filtering": "linear" },
+            "downscale1": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 128, "height": 256, "filtering": "linear" },
+            "downscale2": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 64, "height": 256, "filtering": "linear" },
+            "downscale3": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 32, "height": 256, "filtering": "linear" },
+            "downscale4": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 16, "height": 256, "filtering": "linear" },
+            "downscale5": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 8, "height": 256, "filtering": "linear" },
+            "downscale6": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 4, "height": 256, "filtering": "linear" },
+            "downscale7": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 2, "height": 256, "filtering": "linear" },
+            "downscale8": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 1, "height": 256, "filtering": "linear" },
+            "bounds_color": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "width": 1, "height": 1, "filtering": "linear" },
+            "gradient_color": { "type": "color", "clear": [0,0,0,0], "load_state": "clear", "store_state": "save", "filtering": "linear" }
+        },
+        "images": {
+            "hair_nn": { "recognizer_feature_name": "hair", "active": true, "type": "segmentation_mask" },
+            "hair_strand_nn": { "recognizer_feature_name": "hair_strand", "active": true, "type": "segmentation_mask" }
+        },
+        "materials": {
+            "shaders/hair/hair_mask":
+            {
+                "path":"/bnb_prefabs/hair/shaders/hair_mask", "samplers": [ { "name": "tex_mask", "image": "hair_nn" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale0":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "hair_mask_color" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale1":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale0" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale2":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale1" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale3":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale2" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale4":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale3" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale5":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale4" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale6":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale5" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale7":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale6" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/downscale8":
+            {
+                "path":"/bnb_prefabs/hair/shaders/downscale/downscale", "samplers": [ { "name": "tex_camera", "image": "downscale7" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/bounds":
+            {
+                "path":"/bnb_prefabs/hair/shaders/bounds", "samplers": [ { "name": "tex_mask", "image": "downscale8" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/gradient":
+            {
+                "path":"/bnb_prefabs/hair/shaders/gradient", "samplers": [ { "name": "tex_mask", "image": "bounds_color" } ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/hair/hair":
+            {
+                "path":"/bnb_prefabs/hair/shaders/hair", 
+                "samplers": 
+                [
+                    { "name": "tex_camera", "image": "hair_camera_color" },
+                    { "name": "tex_hair_mask", "image": "hair_nn" },
+                    { "name": "tex_gradient_mask", "image": "gradient_color" },
+                    { "name": "tex_strands_mask", "image": "hair_strand_nn" }
+                ],
+                "state": { "backfaces": true, "blend": "alpha", "colorwrite": true, "ztest": false, "zwrite": false },
+                "parameters":{
+                    "@var_hair_color0": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@var_hair_color1": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@var_hair_color2": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@var_hair_color3": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@var_hair_color4": { "type": "vec4", "value": [0, 0, 0, 0] },
+                    "@var_hair_colors_count_mode": { "type": "vec4", "value": [0, 0, 0, 0] }
+                }
+            }
+        }
+    },
+    "entities": {
+        "hair_mask_color": { "components": { "mesh_instance" : { "materials": ["shaders/hair/hair_mask"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_mask" },
+        "downscale0": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale0"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale0" },
+        "downscale1": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale1"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale1" },
+        "downscale2": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale2"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale2" },
+        "downscale3": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale3"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale3" },
+        "downscale4": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale4"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale4" },
+        "downscale5": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale5"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale5" },
+        "downscale6": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale6"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale6" },
+        "downscale7": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale7"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale7" },
+        "downscale8": { "components": { "mesh_instance" : { "materials": ["shaders/hair/downscale8"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_downscale8" },
+        "bounds": { "components": { "mesh_instance" : { "materials": ["shaders/hair/bounds"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_bounds" },
+        "gradient": { "components": { "mesh_instance" : { "materials": ["shaders/hair/gradient"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair_gradient"},
+        "hair": { "components": { "mesh_instance" : { "materials": ["shaders/hair/hair"], "mesh": "$builtin$meshes/fs_tri" } }, "layer": "hair"}
+    },
+    "root": [
+        "hair"
+    ],
+    "render_list": {
+        "default": [
+            {"layer": "camera_layer", "render_target": "hair_camera_color"},
+            { "layer": "hair_mask", "render_target": "hair_mask_color" },
+            { "layer": "hair_downscale0", "render_target": "downscale0" },
+            { "layer": "hair_downscale1", "render_target": "downscale1" },
+            { "layer": "hair_downscale2", "render_target": "downscale2" },
+            { "layer": "hair_downscale3", "render_target": "downscale3" },
+            { "layer": "hair_downscale4", "render_target": "downscale4" },
+            { "layer": "hair_downscale5", "render_target": "downscale5" },
+            { "layer": "hair_downscale6", "render_target": "downscale6" },
+            { "layer": "hair_downscale7", "render_target": "downscale7" },
+            { "layer": "hair_downscale8", "render_target": "downscale8" },
+            { "layer": "hair_bounds", "render_target": "bounds" },
+            { "layer": "hair_gradient", "render_target": "gradient" },
+            { "layer": "hair", "render_target": "base_rt" }
+        ]
+    },
+    "render_targets": 
+    {
+        "hair_mask_color": { "attachments": [ "hair_mask_color"]},
+        "hair_camera_color": { "attachments": [ "hair_camera_color"]},
+        "downscale0": { "attachments": ["downscale0"], "width": 256, "height": 256 },
+        "downscale1": { "attachments": ["downscale1"], "width": 128, "height": 256 },
+        "downscale2": { "attachments": ["downscale2"], "width": 64, "height": 256 },
+        "downscale3": { "attachments": ["downscale3"], "width": 32, "height": 256 },
+        "downscale4": { "attachments": ["downscale4"], "width": 16, "height": 256 },
+        "downscale5": { "attachments": ["downscale5"], "width": 8, "height": 256 },
+        "downscale6": { "attachments": ["downscale6"], "width": 4, "height": 256 },
+        "downscale7": { "attachments": ["downscale7"], "width": 2, "height": 256 },
+        "downscale8": { "attachments": ["downscale8"], "width": 1, "height": 256 },
+        "bounds": { "attachments": ["bounds_color"], "width": 1, "height": 1 },
+        "gradient": { "attachments": ["gradient_color"]}
+    },
+    "script": "/bnb_prefabs/hair/scripts/index.js"
+}

@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "description": "Eyes lenses with applied texture",
+    "required": [
+        "filename"
+    ],
+    "properties": {
+        "filename": {
+            "type": "string",
+            "description": "Path to the lenses texture for both eyes"
+        }
+    }
+}

@@ -1,0 +1,84 @@
+{
+    "apply_order": 60,
+    "depends": ["camera", "eyes_nn"],
+    "assets": {
+        "meshes": {
+            "quads_lenses": "bnb_prefabs/eye_lenses/meshes/quads.bsm2",
+            "tri_lenses": "$builtin$meshes/fs_tri"
+        },
+        "attachments": {
+            "lens_cmass": { "clear": [ 0, 0, 0, 0 ], "load_state": "dont_care", "store_state": "save", "type": "color","format": "rgba16f", "width": 128, "height": 64, "filtering": "linear", "generate_mipmaps": true },
+            "lens_eye_coords":      { "clear": [ 0.35, 0.0, 0.3, 1.0 ], "load_state": "clear", "store_state": "save", "type": "color", "format": "rgba16f" },
+            "lens_eye_mask_t_prev": { "clear": [ 0.35, 0.0, 0.3, 1.0 ], "load_state": "clear", "store_state": "save", "type": "color", "format": "rgba16f" }
+        },
+        "images":
+        {
+            "@eye_lenses_texture": {"file_name": "", "type": "texture" }      
+        },
+        "materials": {
+            "shaders/eye_lenses/cmass": {
+                "path": "bnb_prefabs/eye_lenses/shaders/cmass",
+                "samplers": [
+                    { "name": "glfx_L_EYE_MASK", "image": "left_eye_nn" },
+                    { "name": "glfx_R_EYE_MASK", "image": "right_eye_nn" }
+                ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/eye_lenses/bounds": {
+                "path": "bnb_prefabs/eye_lenses/shaders/bounds",
+                "samplers": [
+                    { "name": "glfx_L_EYE_MASK", "image": "left_eye_nn" },
+                    { "name": "glfx_R_EYE_MASK", "image": "right_eye_nn" },
+                    { "name": "eye_mask_t_prev", "image": "lens_eye_mask_t_prev" },
+                    { "name": "cmass", "image": "lens_cmass" }
+                ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "shaders/eye_lenses/quads": {
+                "path": "bnb_prefabs/eye_lenses/shaders/quads",
+                "samplers": [
+                    { "name": "eye_tex", "image": "eye_lenses_texture" },
+                    { "name": "glfx_L_EYE_MASK",          "image": "left_eye_nn" },
+                    { "name": "glfx_L_PUPIL_MASK",        "image": "left_eye_pupil_nn" },
+                    { "name": "glfx_L_CORNEOSCLERA_MASK", "image": "left_eye_corneosclera_nn" },
+                    { "name": "glfx_R_EYE_MASK",          "image": "right_eye_nn" },
+                    { "name": "glfx_R_PUPIL_MASK",        "image": "right_eye_pupil_nn" },
+                    { "name": "glfx_R_CORNEOSCLERA_MASK", "image": "right_eye_corneosclera_nn" },
+                    { "name": "eye_coords", "image": "lens_eye_coords" }
+                ],
+                "state": { "backfaces": true, "blend": "screen", "colorwrite": true, "ztest": false, "zwrite": false }
+            },
+            "$builtin$materials/copy_pixels.lenses": {
+                "samplers": [
+                    { "name": "tex_src", "image": "lens_eye_coords" }
+                ],
+                "state": { "backfaces": true, "blend": "off", "colorwrite": true, "ztest": false, "zwrite": false }
+            }
+        }
+    },
+    "entities": {
+        "lens_cmass": { "components": { "mesh_instance":{ "mesh": "tri_lenses", "materials": [ "shaders/eye_lenses/cmass" ]}}, "layer": "lens_cmass" },
+        "lens_bounds": { "components": { "mesh_instance":{ "mesh": "tri_lenses", "materials": [ "shaders/eye_lenses/bounds" ]}}, "layer": "lens_bounds" },
+        "lens_mask_t_copy": { "components": { "mesh_instance":{ "mesh": "tri_lenses", "materials": [ "$builtin$materials/copy_pixels.lenses" ]}}, "layer": "lens_mask_t_copy" },
+        "lens_quads": { "components": { "mesh_instance":{ "mesh": "quads_lenses", "materials": [ "shaders/eye_lenses/quads" ]}}, "layer": "lens_quads" }
+    },
+    "hierarchy": {
+        "root": [
+            "lens_cmass", "lens_bounds", "lens_mask_t_copy", "lens_quads"
+        ]
+    },
+    "render_list": {
+        "default": [
+            { "layer": "lens_cmass", "render_target": "lens_cmass_RT" },
+            { "layer": "lens_bounds", "render_target": "lens_bounds_RT" },
+            { "layer": "lens_mask_t_copy", "render_target": "lens_mask_t_copy_RT" },
+            { "layer": "lens_quads", "render_target": "base_rt" }
+        ]
+    },
+    "render_targets": {
+        "lens_bounds_RT": { "attachments": [ "lens_eye_coords" ], "width": 2, "height": 2 },
+        "lens_cmass_RT": { "attachments": [ "lens_cmass" ], "width": 128, "height": 64 },
+        "lens_mask_t_copy_RT": { "attachments": [ "lens_eye_mask_t_prev" ], "width": 2, "height": 2 }
+    },
+    "script": "/bnb_prefabs/eye_lenses/scripts/index.js"
+}

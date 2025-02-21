@@ -1,0 +1,13 @@
+{
+    "apply_order": 0,
+    "assets": {
+        "images":{
+            "left_eye_nn": { "active": true, "recognizer_feature_name": "left_eye", "type": "segmentation_mask"},
+            "right_eye_nn": { "active": true, "recognizer_feature_name": "right_eye", "type": "segmentation_mask"},
+            "left_eye_corneosclera_nn": { "active": true, "recognizer_feature_name": "left_eye_corneosclera", "type": "segmentation_mask"},
+            "right_eye_corneosclera_nn": { "active": true, "recognizer_feature_name": "right_eye_corneosclera", "type": "segmentation_mask"},
+            "left_eye_pupil_nn": { "active": true, "recognizer_feature_name": "left_eye_pupil", "type": "segmentation_mask"},
+            "right_eye_pupil_nn": { "active": true, "recognizer_feature_name": "right_eye_pupil", "type": "segmentation_mask"}
+        }
+    }
+}
